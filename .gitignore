@@ -1,0 +1,19 @@
+node_modules/
+dist/
+*.log
+*.tsbuildinfo
+
+# Editor and IDE specific
+.vscode/
+.idea/
+*.sublime-*
+*.swp
+
+# Dependency lock files
+yarn.lock
+package-lock.json
+
+# Build output and logs
+/build/
+/logs/
+/out/
