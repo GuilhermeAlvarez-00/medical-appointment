@@ -6,6 +6,10 @@ export class CreateUserController {
     try {
       const { name, username, password } = request.body;
 
+      if (request.body.isAdmin) {
+        throw new Error("Admin users cannot be created");
+      }
+
       const useCase = new CreateUserUseCase();
       const result = await useCase.execute({ name, username, password });
 
