@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { CreateUserController } from "../usecases/create-user/create-user.controller";
+import { createUserController } from "../modules/users/usecases/create-user";
 
 const userRouter = Router();
 
-const createUserController = new CreateUserController();
-
-userRouter.post("/users", createUserController.handle);
+userRouter.post("/users", async (req, res) => {
+  await createUserController.handle(req, res);
+});
 
 export { userRouter };
