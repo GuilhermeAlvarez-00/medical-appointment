@@ -4,7 +4,6 @@ import { ISpecialityRepository } from "../speciality.repository";
 
 export class SpecialityPrismaRepository implements ISpecialityRepository {
   async save(data: Speciality): Promise<Speciality> {
-    console.log("data", data);
     const speciality = await prismaClient.speciality.create({
       data: {
         id: data.id,
