@@ -11,6 +11,15 @@ export class SpecialityPrismaRepository implements ISpecialityRepository {
         description: data.description,
       },
     });
+    return speciality;
+  }
+
+  async findByName(name: string): Promise<Speciality | null> {
+    const speciality = await prismaClient.speciality.findFirst({
+      where: {
+        name,
+      },
+    });
 
     return speciality;
   }
