@@ -5,7 +5,6 @@ import { CreateSpecialityUseCase } from "./create-speciality.usecase";
 export class CreateSpecialityController {
   constructor(private specialityRepository: ISpecialityRepository) {}
   async handle(req: Request, res: Response) {
-    console.log(req.body);
     try {
       const specialityUseCase = new CreateSpecialityUseCase(
         this.specialityRepository
