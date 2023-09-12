@@ -23,12 +23,41 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "A JSON with all keys of the created speciality",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SpecialityResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create new user",
+        "description": "create a user to manage and use the system",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "A JSON with all keys of the created user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
                 }
               }
             }
@@ -75,6 +104,53 @@
             "type": "string",
             "format": "date-time",
             "example": "2022-01-01T00:00:00Z"
+          }
+        }
+      },
+      "UserRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Guilherme",
+            "description": "User name"
+          },
+          "username": {
+            "type": "string",
+            "example": "gui_barboza",
+            "description": "User username"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456",
+            "description": "User password"
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "d8a9a6f7-4c4c-4c4c-4c4c-4c4c4c4c4c4c"
+          },
+          "name": {
+            "type": "string",
+            "example": "Guilherme"
+          },
+          "username": {
+            "type": "string",
+            "example": "gui_barboza"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456",
+            "format": "password"
+          },
+          "isAdmin": {
+            "type": "boolean",
+            "example": false
           }
         }
       }
