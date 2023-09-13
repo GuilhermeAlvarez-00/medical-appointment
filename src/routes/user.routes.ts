@@ -8,7 +8,7 @@ userRouter.post("/users", async (req, res) => {
   await createUserController.handle(req, res);
 });
 
-userRouter.post("/speciality", async (req, res) => {
+userRouter.post("/specialities", async (req, res) => {
   await specialityController.handle(req, res);
 });
 

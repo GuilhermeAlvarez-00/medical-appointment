@@ -1,0 +1,83 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Serviço de agendamento de consultas",
+    "description": "API para agendamento de consultas",
+    "version": "1.0.0"
+  },
+
+  "paths": {
+    "/specialities": {
+      "post": {
+        "tags": ["Speciality"],
+        "summary": "Create a new speciality",
+        "description": "create a speciality ta could be used by a doctor",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecialityRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A JSON with all keys of the created speciality",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecialityResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SpecialityRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Speciality name",
+            "example": "Pediatria"
+          },
+          "description": {
+            "type": "string",
+            "description": "Speciality description",
+            "example": "Pediatria"
+          }
+        },
+        "required": ["name", "description"]
+      },
+      "SpecialityResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "d8a9a6f7-4c4c-4c4c-4c4c-4c4c4c4c4c4c"
+          },
+          "name": {
+            "type": "string",
+            "example": "Pediatria"
+          },
+          "description": {
+            "type": "string",
+            "example": "Pediatria"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2022-01-01T00:00:00Z"
+          }
+        }
+      }
+    }
+  }
+}
