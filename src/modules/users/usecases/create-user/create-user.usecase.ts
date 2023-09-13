@@ -17,8 +17,12 @@ export class CreateUserUseCase {
   ) {}
 
   async execute(data: UserRequest) {
-    if (!data.username || !data.password) {
-      throw new Error("Username and password are required");
+    if (!data.name || !data.username || !data.password) {
+      throw new CustomError(
+        "Name, username and password are required",
+        400,
+        "REQUIRED_PARAMS"
+      );
     }
 
     const existUser = await this.userRepository.findByUsername(data.username);
