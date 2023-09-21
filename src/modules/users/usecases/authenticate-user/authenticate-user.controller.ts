@@ -3,6 +3,7 @@ import { IUserRepository } from "../../repositories/user.repository";
 import { AuthenticateUserUseCase } from "./authenticate-user.usecase";
 import { logger } from "../../../../utils/logger";
 import { IPasswordCrypto } from "../../../../infra/shared/crypto/password.crypto";
+import { IToken } from "../../../../infra/shared/token/token";
 
 type BodyRequestProps = {
   username: string;
@@ -12,7 +13,8 @@ type BodyRequestProps = {
 export class AuthenticateUserController {
   constructor(
     private userRepository: IUserRepository,
-    private passwordCrypto: IPasswordCrypto
+    private passwordCrypto: IPasswordCrypto,
+    private token: IToken
   ) {}
 
   async handle(request: Request, response: Response) {
@@ -22,7 +24,8 @@ export class AuthenticateUserController {
 
       const authenticateUserUseCase = new AuthenticateUserUseCase(
         this.userRepository,
-        this.passwordCrypto
+        this.passwordCrypto,
+        this.token
       );
 
       const result = await authenticateUserUseCase.execute(username, password);

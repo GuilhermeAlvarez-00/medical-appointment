@@ -1,11 +1,13 @@
 import { CustomError } from "../../../../errors/custom-error";
 import { IPasswordCrypto } from "../../../../infra/shared/crypto/password.crypto";
+import { IToken } from "../../../../infra/shared/token/token";
 import { IUserRepository } from "../../repositories/user.repository";
 
 export class AuthenticateUserUseCase {
   constructor(
     private userRepository: IUserRepository,
-    private passwordCrypto: IPasswordCrypto
+    private passwordCrypto: IPasswordCrypto,
+    private token: IToken
   ) {}
 
   async execute(username: string, password: string) {
@@ -40,6 +42,8 @@ export class AuthenticateUserUseCase {
       );
     }
 
-    return user;
+    const token = this.token.create(user);
+
+    return token;
   }
 }
