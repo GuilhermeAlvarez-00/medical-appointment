@@ -21,7 +21,10 @@ export const ensureAuthentication = (
 
   const isTokenValid = new JWTToken().validate(token);
 
-  if (isTokenValid) return next();
+  if (isTokenValid) {
+    req.body.userId = isTokenValid.sub;
+    return next();
+  }
 
   return res.status(401).json({
     message: "Token invalid",
