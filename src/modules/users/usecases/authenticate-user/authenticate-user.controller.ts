@@ -30,7 +30,7 @@ export class AuthenticateUserController {
 
       const result = await authenticateUserUseCase.execute(username, password);
 
-      return response.json(result);
+      return response.status(201).json(result);
     } catch (error: any) {
       logger.error(error.stack);
       return response.status(error.statusCode).json({ error: error.message });

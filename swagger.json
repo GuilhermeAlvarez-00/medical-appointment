@@ -64,6 +64,29 @@
           }
         }
       }
+    },
+    "/login": {
+      "post": {
+        "tags": ["User"],
+        "description": "User authentication",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Generated token"
+          },
+          "401": {
+            "description": "Token error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -151,6 +174,21 @@
           "isAdmin": {
             "type": "boolean",
             "example": false
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "User username",
+            "example": "mauricio"
+          },
+          "password": {
+            "type": "string",
+            "description": "User password",
+            "example": "123456789"
           }
         }
       }
