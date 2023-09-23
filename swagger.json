@@ -9,6 +9,11 @@
   "paths": {
     "/specialities": {
       "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": ["Speciality"],
         "summary": "Create a new speciality",
         "description": "create a speciality ta could be used by a doctor",
@@ -29,6 +34,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SpecialityResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseTokenError"
                 }
               }
             }
@@ -130,6 +145,15 @@
           }
         }
       },
+      "ResponseTokenError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Token is missing!"
+          }
+        }
+      },
       "UserRequest": {
         "type": "object",
         "properties": {
@@ -191,6 +215,14 @@
             "example": "123456789"
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "tokenUrl": "http://localhost:3333/login"
       }
     }
   }
