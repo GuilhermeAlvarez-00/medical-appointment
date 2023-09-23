@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { createUserController } from "../modules/users/usecases/create-user";
-import { specialityController } from "../modules/speciality/useCases/create-speciality";
+import { authenticateUserController } from "../modules/users/usecases/authenticate-user";
 
 const userRouter = Router();
 
@@ -8,8 +8,8 @@ userRouter.post("/users", async (req, res) => {
   await createUserController.handle(req, res);
 });
 
-userRouter.post("/specialities", async (req, res) => {
-  await specialityController.handle(req, res);
+userRouter.post("/login", async (req, res) => {
+  await authenticateUserController.handle(req, res);
 });
 
 export { userRouter };
