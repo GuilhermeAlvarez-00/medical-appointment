@@ -8,8 +8,6 @@ export const ensureAdmin = async (
 ) => {
   const userRepository = new UserPrismaRepository();
 
-  console.log("USERID: ", req.body.userId);
-
   const user = await userRepository.findById(req.body.userId);
 
   if (!user) {
@@ -22,3 +20,4 @@ export const ensureAdmin = async (
 
   return next();
 };
+
