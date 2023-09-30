@@ -21,7 +21,8 @@
 ## **Cadastro de Médico**
 
 - [ ] Deve ser possível um usuário cadastrar um médico
-  - [ ] O médico deve possuir um CRM com 6 digitos.
-  - [ ] O médico deve estar atrelado a um usuario.
+  - [x] O médico deve possuir um CRM com 6 digitos.
+  - [x] O médico deve estar atrelado a um usuario.
   - [ ] O médico deve ter somente uma especialidade.
-  - [ ] Não deve ser possivel cadastrar um medico sem CRM.
+  - [x] Não deve ser possivel cadastrar um medico sem CRM.
+  - [x] Não deve ser possivel cadastrar o mesmo CRM mais de uma vez.
