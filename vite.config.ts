@@ -3,8 +3,8 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   test: {
-    server: {
-      sourcemap: true,
+    coverage: {
+      provider: "istanbul",
     },
   },
 });
