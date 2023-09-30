@@ -1,6 +1,5 @@
-import { test, expect } from "vitest";
+import { test, expect, describe } from "vitest";
 import { Doctor } from "../doctor.entity";
-import { describe } from "node:test";
 
 describe("Doctor entity", () => {
   test("Should create a new doctor", () => {
