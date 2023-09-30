@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { CustomError } from "../../../../errors/custom-error";
 import { JWTToken } from "../../token/jwt.token";
 
 export const ensureAuthentication = (

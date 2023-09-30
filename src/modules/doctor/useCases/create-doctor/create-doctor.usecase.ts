@@ -38,7 +38,7 @@ export class CreateDoctorUseCase {
       );
     }
 
-    const user = User.create({
+    const user = await User.create({
       name: data.name,
       password: data.password,
       username: data.username,
@@ -59,7 +59,7 @@ export class CreateDoctorUseCase {
       userId: userCreated.id,
     });
 
-    const doctorCreated = this.doctorRepository.save(doctor);
+    const doctorCreated = await this.doctorRepository.save(doctor);
 
     return doctorCreated;
   }
