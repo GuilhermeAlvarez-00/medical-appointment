@@ -23,6 +23,6 @@
 - [ ] Deve ser possível um usuário cadastrar um médico
   - [x] O médico deve possuir um CRM com 6 digitos.
   - [x] O médico deve estar atrelado a um usuario.
-  - [ ] O médico deve ter somente uma especialidade.
+  - [x] O médico deve ter somente uma especialidade.
   - [x] Não deve ser possivel cadastrar um medico sem CRM.
   - [x] Não deve ser possivel cadastrar o mesmo CRM mais de uma vez.
