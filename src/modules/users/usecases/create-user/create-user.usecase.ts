@@ -4,7 +4,7 @@ import { IPasswordCrypto } from "../../../../infra/shared/crypto/password.crypto
 import { User } from "../../entities/user.entity";
 import { IUserRepository } from "../../repositories/user.repository";
 
-type UserRequest = {
+export type UserRequest = {
   name: string;
   username: string;
   password: string;
@@ -17,14 +17,6 @@ export class CreateUserUseCase {
   ) {}
 
   async execute(data: UserRequest) {
-    if (!data.name || !data.username || !data.password) {
-      throw new CustomError(
-        "Name, username and password are required",
-        400,
-        "REQUIRED_PARAMS"
-      );
-    }
-
     const existUser = await this.userRepository.findByUsername(data.username);
 
     if (existUser) {

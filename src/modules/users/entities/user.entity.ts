@@ -1,4 +1,5 @@
 import { randomUUID } from "crypto";
+import { CustomError } from "../../../errors/custom-error";
 
 type IUser = {
   name: string;
@@ -14,6 +15,14 @@ export class User {
   isAdmin: boolean;
 
   private constructor(props: IUser) {
+    if (!props.name || !props.username || !props.password) {
+      throw new CustomError(
+        "Name, username and password are required",
+        400,
+        "REQUIRED_PARAMS"
+      );
+    }
+
     this.id = randomUUID();
     this.name = props.name;
     this.username = props.username;
