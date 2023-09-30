@@ -1,4 +1,5 @@
 import { CustomError } from "../../../../errors/custom-error";
+import { ISpecialityRepository } from "../../../speciality/repositories/speciality.repository";
 import { User } from "../../../users/entities/user.entity";
 import { IUserRepository } from "../../../users/repositories/user.repository";
 import { UserRequest } from "../../../users/usecases/create-user/create-user.usecase";
@@ -14,10 +15,19 @@ export type CreateDoctorUseCaseRequest = UserRequest & {
 export class CreateDoctorUseCase {
   constructor(
     private userRepository: IUserRepository,
-    private doctorRepository: IDoctorRepository
+    private doctorRepository: IDoctorRepository,
+    private specialityRepository: ISpecialityRepository
   ) {}
 
   async execute(data: CreateDoctorUseCaseRequest) {
+    const speciality = await this.specialityRepository.findById(
+      data.specialityId
+    );
+
+    if (!speciality) {
+      throw new CustomError("Speciality does not exists");
+    }
+
     const existUser = await this.userRepository.findByUsername(data.username);
 
     if (existUser) {
@@ -34,7 +44,7 @@ export class CreateDoctorUseCase {
       username: data.username,
     });
 
-    const createdUser = await this.userRepository.save(user);
+    const userCreated = await this.userRepository.save(user);
 
     const crmExists = await this.doctorRepository.findByCRM(data.crm);
 
@@ -46,11 +56,11 @@ export class CreateDoctorUseCase {
       crm: data.crm,
       email: data.email,
       specialityId: data.specialityId,
-      userId: createdUser.id,
+      userId: userCreated.id,
     });
 
-    const createdDoctor = this.doctorRepository.save(doctor);
+    const doctorCreated = this.doctorRepository.save(doctor);
 
-    return createdDoctor;
+    return doctorCreated;
   }
 }
