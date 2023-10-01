@@ -38,6 +38,12 @@ export class CreateDoctorUseCase {
       );
     }
 
+    const crmExists = await this.doctorRepository.findByCRM(data.crm);
+
+    if (crmExists) {
+      throw new CustomError("CRM already exists");
+    }
+
     const user = await User.create({
       name: data.name,
       password: data.password,
@@ -45,12 +51,6 @@ export class CreateDoctorUseCase {
     });
 
     const userCreated = await this.userRepository.save(user);
-
-    const crmExists = await this.doctorRepository.findByCRM(data.crm);
-
-    if (crmExists) {
-      throw new CustomError("CRM already exists");
-    }
 
     const doctor = Doctor.create({
       crm: data.crm,
