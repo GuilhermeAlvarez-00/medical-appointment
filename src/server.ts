@@ -4,6 +4,7 @@ import swaggerUI from "swagger-ui-express";
 
 import swaggerDocument from "../swagger.json";
 import { specialityRouter } from "./routes/speciality.routes";
+import { doctorRouter } from "./routes/doctor.routes";
 
 const PORT = 3333;
 
@@ -18,6 +19,7 @@ app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 // ROUTES
 app.use(userRouter);
 app.use(specialityRouter);
+app.use(doctorRouter);
 
 // SERVER
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));

@@ -12,8 +12,17 @@
 
 ## **Cadastro de Especialidade**
 
-- [ ] Deve ser possível um usuário cadastrar uma especialidade
+- [x] Deve ser possível um usuário cadastrar uma especialidade
   - [x] O usuário precisa estar autenticado na aplicação.
   - [x] Não deve ser possível realizar o cadastro de uma especialidade já existente, ou seja, com o mesmo nome.
-  - [ ] O usuário precisa ter permissão de administrador.
+  - [x] O usuário precisa ter permissão de administrador.
   - [x] Não deve ser possível cadastrar uma especialidade com nome vazio
+
+## **Cadastro de Médico**
+
+- [x] Deve ser possível um usuário cadastrar um médico
+  - [x] O médico deve possuir um CRM com 6 digitos.
+  - [x] O médico deve estar atrelado a um usuario.
+  - [x] O médico deve ter somente uma especialidade.
+  - [x] Não deve ser possivel cadastrar um medico sem CRM.
+  - [x] Não deve ser possivel cadastrar o mesmo CRM mais de uma vez.

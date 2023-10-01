@@ -20,3 +20,6 @@ package-lock.json
 
 # Env files
 .env
+
+# Tests
+/coverage
