@@ -5,7 +5,6 @@
     "description": "API para agendamento de consultas",
     "version": "1.0.0"
   },
-
   "paths": {
     "/specialities": {
       "post": {
@@ -99,6 +98,36 @@
           },
           "401": {
             "description": "Token error"
+          }
+        }
+      }
+    },
+    "/doctors": {
+      "post": {
+        "tags": ["Doctors"],
+        "description": "User authentication",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DoctorRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create a new doctor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DoctorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error to create doctor"
           }
         }
       }
@@ -215,6 +244,41 @@
             "example": "123456789"
           }
         }
+      },
+      "DoctorRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Guilherme",
+            "description": "User name"
+          },
+          "username": {
+            "type": "string",
+            "example": "gui_barboza",
+            "description": "User username"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456",
+            "description": "User password"
+          },
+          "email": {
+            "type": "string",
+            "example": "user@gmail.com"
+          },
+          "crm": {
+            "type": "string",
+            "example": "123456"
+          },
+          "specialityId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "DoctorResponse": {
+        "type": "object"
       }
     },
     "securitySchemes": {
