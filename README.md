@@ -26,3 +26,12 @@
   - [x] O médico deve ter somente uma especialidade.
   - [x] Não deve ser possivel cadastrar um medico sem CRM.
   - [x] Não deve ser possivel cadastrar o mesmo CRM mais de uma vez.
+
+## **Cadastro de Informações do médico**
+
+- [ ] Deve ser possível cadastrar a informação de médico
+  - [ ] O médico deve estar cadastrado.
+  - [ ] O médico deve estar autenticado.
+  - [ ] Não deve ser possível ter mais de um registro de informação por médico.
+  - [ ] O horário de término não deve ser menor que o horário de inicio
+  - [ ] A duração da consulta não pode ser menor ou igual a zero.
