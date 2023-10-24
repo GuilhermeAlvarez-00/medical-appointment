@@ -6,7 +6,6 @@ import {
 import { IDoctorRepository } from "../../repositories/doctor.repository";
 import { IUserRepository } from "../../../users/repositories/user.repository";
 import { ISpecialityRepository } from "../../../speciality/repositories/speciality.repository";
-import { CustomError } from "../../../../errors/custom-error";
 
 export class CreateDoctorController {
   constructor(
@@ -33,3 +32,4 @@ export class CreateDoctorController {
     }
   }
 }
+
