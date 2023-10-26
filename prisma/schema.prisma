@@ -43,5 +43,19 @@ model Doctor {
 
   createdAt DateTime @default(now())
 
+  doctorInfo DoctorInfo?
+
   @@map("doctors")
+}
+
+model DoctorInfo {
+  id       String @id @default(uuid())
+  startAt  String 
+  endAt    String
+  duration Int
+  price    Decimal
+  doctorId String @unique
+  doctor   Doctor @relation(fields: [doctorId], references: [id])
+
+  @@map("doctor_info")
 }
