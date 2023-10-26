@@ -10,10 +10,15 @@ export class DoctorMemoryRepository implements IDoctorRepository {
   }
 
   async findByCRM(crm: string): Promise<string | null> {
-    const crmExists = this.doctors.find(item => item.crm === crm);
+    const crmExists = this.doctors.find((item) => item.crm === crm);
 
-    if(!crmExists) return null;
+    if (!crmExists) return null;
 
     return crm;
   }
+
+  async findBytUserId(userId: string): Promise<Doctor | null> {
+    return this.doctors.find((item) => item.userId === userId) ?? null;
+  }
 }
+

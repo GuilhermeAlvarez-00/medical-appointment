@@ -26,4 +26,15 @@ export class DoctorPrismaRepository implements IDoctorRepository {
 
     return doctor?.crm || null;
   }
+
+  async findBytUserId(userId: string): Promise<Doctor | null> {
+    const doctor = await prismaClient.doctor.findUnique({
+      where: {
+        userId,
+      },
+    });
+
+    return doctor || null;
+  }
 }
+
