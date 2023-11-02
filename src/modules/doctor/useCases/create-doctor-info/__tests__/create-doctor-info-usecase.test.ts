@@ -1,21 +1,17 @@
 import dayjs from "dayjs";
 import { describe, expect, test } from "vitest";
 import { CreateDoctorInfoUseCase } from "../create-doctor-info.usecase";
-import { DoctorMemoryRepository } from "../../../repositories/implementations/doctor-memory.repository";
+import { DoctorMemoryRepository } from "../../../repositories/implementations/in-memory/doctor-memory.repository";
 import { randomUUID } from "crypto";
-
-type CreateDoctorInfoUseCaseRequest = {
-  startAt: string;
-  endAt: string;
-  price: number;
-  duration: number;
-};
+import { DoctorInfoMemoryRepository } from "../../../repositories/implementations/in-memory/doctor-info-memory.repository";
 
 describe("Create Doctor Info", () => {
   test("Should not create a doctor info if doctor not exists", () => {
     const doctorRepository = new DoctorMemoryRepository();
+    const doctorInfoRepository = new DoctorInfoMemoryRepository();
     const createDoctorInfoUseCase = new CreateDoctorInfoUseCase(
-      doctorRepository
+      doctorRepository,
+      doctorInfoRepository
     );
 
     expect(async () => {
@@ -33,8 +29,10 @@ describe("Create Doctor Info", () => {
 
   test("Should not create a doctor if end date is before that start date", async () => {
     const doctorRepository = new DoctorMemoryRepository();
+    const doctorInfoRepository = new DoctorInfoMemoryRepository();
     const createDoctorInfoUseCase = new CreateDoctorInfoUseCase(
-      doctorRepository
+      doctorRepository,
+      doctorInfoRepository
     );
 
     const userId = randomUUID();
@@ -61,8 +59,10 @@ describe("Create Doctor Info", () => {
   });
   test("Should not create a doctor if start date is invalid", async () => {
     const doctorRepository = new DoctorMemoryRepository();
+    const doctorInfoRepository = new DoctorInfoMemoryRepository();
     const createDoctorInfoUseCase = new CreateDoctorInfoUseCase(
-      doctorRepository
+      doctorRepository,
+      doctorInfoRepository
     );
 
     const userId = randomUUID();
@@ -90,8 +90,10 @@ describe("Create Doctor Info", () => {
 
   test("Should not create a doctor if end date is invalid", async () => {
     const doctorRepository = new DoctorMemoryRepository();
+    const doctorInfoRepository = new DoctorInfoMemoryRepository();
     const createDoctorInfoUseCase = new CreateDoctorInfoUseCase(
-      doctorRepository
+      doctorRepository,
+      doctorInfoRepository
     );
 
     const userId = randomUUID();
@@ -115,5 +117,38 @@ describe("Create Doctor Info", () => {
         String(doctor?.userId)
       );
     }).rejects.toThrow("Invalid EndAt");
+  });
+
+  test("Should not create a new doctor info", async () => {
+    const doctorRepository = new DoctorMemoryRepository();
+    const doctorInfoRepository = new DoctorInfoMemoryRepository();
+    const createDoctorInfoUseCase = new CreateDoctorInfoUseCase(
+      doctorRepository,
+      doctorInfoRepository
+    );
+
+    const userId = randomUUID();
+
+    const doctor = await doctorRepository.save({
+      crm: "crm",
+      email: "email",
+      id: randomUUID(),
+      specialityId: "specialityId",
+      userId,
+    });
+
+    const doctorInfo = {
+      startAt: "10:00",
+      endAt: "20:00",
+      price: 150,
+      duration: 10,
+    };
+
+    const doctorCreated = await createDoctorInfoUseCase.execute(
+      doctorInfo,
+      userId
+    );
+
+    expect(doctorCreated).toHaveProperty("id");
   });
 });
