@@ -1,6 +1,6 @@
-import { prismaClient } from "../../../../infra/database/prisma.config";
-import { Doctor } from "../../entities/doctor.entity";
-import { IDoctorRepository } from "../doctor.repository";
+import { prismaClient } from "../../../../../infra/database/prisma.config";
+import { Doctor } from "../../../entities/doctor.entity";
+import { IDoctorRepository } from "../../doctor.repository";
 
 export class DoctorPrismaRepository implements IDoctorRepository {
   async save(data: Doctor): Promise<Doctor | null> {
@@ -27,7 +27,7 @@ export class DoctorPrismaRepository implements IDoctorRepository {
     return doctor?.crm || null;
   }
 
-  async findBytUserId(userId: string): Promise<Doctor | null> {
+  async findByUserId(userId: string): Promise<Doctor | null> {
     const doctor = await prismaClient.doctor.findUnique({
       where: {
         userId,
@@ -37,4 +37,3 @@ export class DoctorPrismaRepository implements IDoctorRepository {
     return doctor || null;
   }
 }
-

@@ -1,5 +1,5 @@
-import { Doctor } from "../../entities/doctor.entity";
-import { IDoctorRepository } from "../doctor.repository";
+import { Doctor } from "../../../entities/doctor.entity";
+import { IDoctorRepository } from "../../doctor.repository";
 
 export class DoctorMemoryRepository implements IDoctorRepository {
   doctors: Doctor[] = [];
@@ -17,8 +17,7 @@ export class DoctorMemoryRepository implements IDoctorRepository {
     return crm;
   }
 
-  async findBytUserId(userId: string): Promise<Doctor | null> {
+  async findByUserId(userId: string): Promise<Doctor | null> {
     return this.doctors.find((item) => item.userId === userId) ?? null;
   }
 }
-
