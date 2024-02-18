@@ -21,7 +21,7 @@ export const ensureAuthentication = (
   const isTokenValid = new JWTToken().validate(token);
 
   if (isTokenValid) {
-    req.body.userId = isTokenValid.sub;
+    req.userId = isTokenValid.sub;
     return next();
   }
 
