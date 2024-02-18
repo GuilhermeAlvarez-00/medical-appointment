@@ -1,10 +1,8 @@
 import express from "express";
-import { userRouter } from "./routes/user.routes";
 import swaggerUI from "swagger-ui-express";
 
 import swaggerDocument from "../swagger.json";
-import { specialityRouter } from "./routes/speciality.routes";
-import { doctorRouter } from "./routes/doctor.routes";
+import { routes } from "./routes";
 
 const PORT = 3333;
 
@@ -13,13 +11,11 @@ const app = express();
 // CONFIGS
 app.use(express.json());
 
-// DOCS
+// SWAGGER
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // ROUTES
-app.use(userRouter);
-app.use(specialityRouter);
-app.use(doctorRouter);
+app.use(routes);
 
 // SERVER
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
