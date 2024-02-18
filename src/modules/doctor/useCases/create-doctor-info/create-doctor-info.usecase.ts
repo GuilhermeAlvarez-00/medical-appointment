@@ -22,7 +22,9 @@ export class CreateDoctorInfoUseCase {
       doctorId: doctorByUserId.id,
     });
 
-    const doctorCreated = await this.doctorInfoRepository.save(doctorInfo);
+    const doctorCreated = await this.doctorInfoRepository.saveOrUpdate(
+      doctorInfo
+    );
     return doctorCreated;
   }
 }
