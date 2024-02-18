@@ -131,6 +131,41 @@
           }
         }
       }
+    },
+    "/doctor-info": {
+      "post": {
+        "tags": ["doctor-info"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Create information about doctor",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DoctorInfoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create a new information about doctor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DoctorInfoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error to create doctor info"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -279,6 +314,68 @@
       },
       "DoctorResponse": {
         "type": "object"
+      },
+      "DoctorInfoRequest": {
+        "type": "object",
+        "properties": {
+          "startAt": {
+            "type": "string",
+            "example": "09:00",
+            "description": "Time the doctor starts his shift"
+          },
+          "endAt": {
+            "type": "string",
+            "example": "18:00",
+            "description": "Time the doctor closes his shift"
+          },
+          "price": {
+            "type": "number",
+            "example": 400,
+            "description": "Consultation price"
+          },
+          "duration": {
+            "type": "number",
+            "example": 30,
+            "description": "Consultation duration in minutes"
+          }
+        }
+      },
+      "DoctorInfoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "d8a9a6f7-4c4c-4c4c-4c4c-4c4c4c4c4c4c",
+            "description": "Doctor info id"
+          },
+          "doctorId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "d8a9a6f7-4c4c-4c4c-4c4c-4c4c4c4c4c4c",
+            "description": "Doctor id"
+          },
+          "startAt": {
+            "type": "string",
+            "example": "09:00",
+            "description": "Time the doctor starts his shift"
+          },
+          "endAt": {
+            "type": "string",
+            "example": "18:00",
+            "description": "Time the doctor closes his shift"
+          },
+          "price": {
+            "type": "number",
+            "example": 400,
+            "description": "Consultation price"
+          },
+          "duration": {
+            "type": "number",
+            "example": 30,
+            "description": "Consultation duration in minutes"
+          }
+        }
       }
     },
     "securitySchemes": {
