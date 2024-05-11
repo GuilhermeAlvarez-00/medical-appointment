@@ -166,6 +166,36 @@
           }
         }
       }
+    },
+    "/patient": {
+      "post": {
+        "tags": ["patients"],
+        "description": "Create a new patient",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create a new patient",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error to create a patient"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -374,6 +404,62 @@
             "type": "number",
             "example": 30,
             "description": "Consultation duration in minutes"
+          }
+        }
+      },
+      "PatientRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Guilherme",
+            "description": "Patient name"
+          },
+          "username": {
+            "type": "string",
+            "example": "gui_barboza",
+            "description": "Patient username"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456",
+            "description": "Patient password"
+          },
+          "email": {
+            "type": "string",
+            "example": "patient@gmail.com"
+          },
+          "document": {
+            "type": "string",
+            "example": "123456",
+            "min": 5
+          }
+        }
+      },
+      "PatientResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "d8a9a6f7-4c4c-4c4c-4c4c-4c4c4c4c4c4c",
+            "description": "Patient id"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "d8a9a6f7-4c4c-4c4c-4c4c-4c4c4c4c4c4c",
+            "description": "User id"
+          },
+          "document": {
+            "type": "string",
+            "example": "123456",
+            "description": "Patient's document"
+          },
+          "email": {
+            "type": "string",
+            "example": "patient@gmail.com",
+            "description": "Patient's email"
           }
         }
       }
