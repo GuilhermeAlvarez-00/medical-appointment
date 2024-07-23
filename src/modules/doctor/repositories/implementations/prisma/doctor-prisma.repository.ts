@@ -36,4 +36,15 @@ export class DoctorPrismaRepository implements IDoctorRepository {
 
     return doctor || null;
   }
+
+  async findById(id: string): Promise<Doctor | null> {
+    const doctor = await prismaClient.doctor.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return doctor || null;
+  }
 }
+
