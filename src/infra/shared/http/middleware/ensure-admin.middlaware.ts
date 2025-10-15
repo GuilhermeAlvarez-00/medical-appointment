@@ -8,7 +8,7 @@ export const ensureAdmin = async (
 ) => {
   const userRepository = new UserPrismaRepository();
 
-  const user = await userRepository.findById(req.body.userId);
+  const user = await userRepository.findById(req.userId);
 
   if (!user) {
     return res.status(400).json({ message: "User not exist" });
