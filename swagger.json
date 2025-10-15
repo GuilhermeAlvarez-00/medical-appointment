@@ -167,6 +167,41 @@
         }
       }
     },
+    "/doctor-schedule": {
+      "post": {
+        "tags": ["doctor-schedule"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Create information about doctor",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DoctorScheduleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create a new information about doctor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DoctorScheduleResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error to create doctor info"
+          }
+        }
+      }
+    },
     "/patient": {
       "post": {
         "tags": ["patients"],
@@ -348,16 +383,6 @@
       "DoctorInfoRequest": {
         "type": "object",
         "properties": {
-          "startAt": {
-            "type": "string",
-            "example": "09:00",
-            "description": "Time the doctor starts his shift"
-          },
-          "endAt": {
-            "type": "string",
-            "example": "18:00",
-            "description": "Time the doctor closes his shift"
-          },
           "price": {
             "type": "number",
             "example": 400,
@@ -406,6 +431,43 @@
             "description": "Consultation duration in minutes"
           }
         }
+      },
+      "SchedulesRequest": {
+        "type": "object",
+        "properties": {
+          "startAt": {
+            "type": "string",
+            "example": "08:00"
+          },
+          "endAt": {
+            "type": "string",
+            "example": "12:00"
+          },
+          "dayOfWeek": {
+            "type": "integer",
+            "example": 1,
+            "description": "0 = Sunday, 1 = Monday, etc."
+          }
+        },
+        "required": ["startAt", "endAt", "dayOfWeek"]
+      },
+      "DoctorScheduleRequest": {
+        "type": "object",
+        "properties": {
+          "doctorId": {
+            "type": "string",
+            "example": "123"
+          },
+          "schedules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SchedulesRequest"
+            }
+          }
+        }
+      },
+      "DoctorScheduleResponse": {
+        "type": "object"
       },
       "PatientRequest": {
         "type": "object",
