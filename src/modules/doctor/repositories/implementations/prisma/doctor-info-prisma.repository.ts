@@ -7,8 +7,6 @@ const mapper = (data: DoctorInfoPrisma): DoctorInfo => {
   return {
     doctorId: data.doctorId,
     duration: data.duration,
-    endAt: data.endAt,
-    startAt: data.startAt,
     price: Number(data.price),
     id: data.id,
   };
@@ -22,16 +20,12 @@ export class DoctorInfoPrismaRepository implements IDoctorInfoRepository {
       },
       create: {
         duration: data.duration,
-        endAt: data.endAt,
-        startAt: data.startAt,
         price: Number(data.price),
         doctorId: data.doctorId,
         id: data.id,
       },
       update: {
         duration: data.duration,
-        endAt: data.endAt,
-        startAt: data.startAt,
         price: Number(data.price),
       },
     });
