@@ -45,14 +45,13 @@ model Doctor {
   createdAt DateTime @default(now())
 
   doctorInfo DoctorInfo?
+	doctorSchedules DoctorSchedules[]
 
   @@map("doctors")
 }
 
 model DoctorInfo {
   id       String @id @default(uuid())
-  startAt  String 
-  endAt    String
   duration Int
   price    Decimal
   doctorId String @unique
@@ -71,4 +70,16 @@ model Patient {
   userId String @unique
 
   @@map("patients")
+}
+
+model DoctorSchedules {
+	id String @id @default(uuid())
+	startAt String
+	endAt String
+	dayOfWeek Int
+
+	doctorId String 
+	doctor Doctor @relation(fields: [doctorId], references: [id])
+
+	@@map("doctor_schedules")
 }
